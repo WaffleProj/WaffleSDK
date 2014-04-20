@@ -1,0 +1,7 @@
+WaffleNightly
+
+*.suo
+*.sdf
+*.opensdf
+
+*.exp
