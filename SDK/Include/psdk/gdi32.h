@@ -23,6 +23,14 @@ typedef int (WINAPI *LPENUMFONTFAMILIESEXA)(
     _In_    DWORD dwFlags
     );
 
+typedef int (WINAPI *LPENUMFONTFAMILIESEXW)(
+    _In_    HDC hdc,
+    _In_    LPLOGFONTW lpLogfont,
+    _In_    FONTENUMPROCW lpEnumFontFamExProc,
+    _In_    LPARAM lParam,
+    _In_    DWORD dwFlags
+    );
+
 typedef int (WINAPI *LPENUMFONTSW)(
     _In_    HDC hdc,
     _In_    LPCWSTR lpFaceName,

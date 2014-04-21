@@ -84,10 +84,25 @@ typedef int (WINAPI *LPMESSAGEBOXA)(
     _In_        UINT uType
     );
 
+typedef int (WINAPI *LPMESSAGEBOXW)(
+    _In_opt_    HWND hWnd,
+    _In_opt_    LPCWSTR lpText,
+    _In_opt_    LPCWSTR lpCaption,
+    _In_        UINT uType
+    );
+
 typedef int (WINAPI *LPMESSAGEBOXEXA)(
     _In_opt_    HWND hWnd,
     _In_opt_    LPCSTR lpText,
     _In_opt_    LPCSTR lpCaption,
+    _In_        UINT uType,
+    _In_        WORD wLanguageId
+    );
+
+typedef int (WINAPI *LPMESSAGEBOXEXW)(
+    _In_opt_    HWND hWnd,
+    _In_opt_    LPCWSTR lpText,
+    _In_opt_    LPCWSTR lpCaption,
     _In_        UINT uType,
     _In_        WORD wLanguageId
     );
