@@ -204,4 +204,12 @@ typedef DWORD(WINAPI *LPGETPRIVATEPROFILESTRINGA)(
     _In_    DWORD nSize,
     _In_    LPCSTR lpFileName
     );
+    
+typedef BOOL(WINAPI *LPGETTHREADPREFERREDUILANGUAGES)(
+    _In_        DWORD dwFlags,
+    _Out_       PULONG pulNumLanguages,
+    _Out_opt_   PZZWSTR pwszLanguagesBuffer,
+    _Inout_     PULONG pcchLanguagesBuffer
+    );
+    
 #endif /* __SDK_WAFFLE_PSDK_KERNEL32_H_ */
