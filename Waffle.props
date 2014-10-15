@@ -45,10 +45,13 @@
     <Link Condition="'$(ConfigurationType)'=='Application'">
       <EntryPointSymbol>Main</EntryPointSymbol>
     </Link>
-    <Link Condition="'$(ConfigurationType)'=='DynamicLibrary'">
+    <Link Condition="'$(ConfigurationType)|$(NoEntryPoint)'=='DynamicLibrary|false'">
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <ImportLibrary>$(SolutionDir)SDK\Lib\$(PEMachine)\$(TargetName).lib</ImportLibrary>
       <ModuleDefinitionFile>export.def</ModuleDefinitionFile>
+    </Link>
+    <Link Condition="'$(NoEntryPoint)'=='false'">
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
 
