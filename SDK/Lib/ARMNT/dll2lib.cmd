@@ -15,20 +15,16 @@ echo	See more informations at https://github.com/peterdn/dll2lib
 call	:dll2lib kernel32
 call	:dll2lib gdi32
 call	:dll2lib comdlg32
-call	:dll2lib comctl32
-call	:dll2lib shell32
-call	:dll2lib shlwapi
-call	:dll2lib version
 
 pause
 goto	eof
 :dll2lib
 ::Using Windows RT libraries
 ::Download link: http://www.microsoft.com/en-us/download/details.aspx?id=40810
-copy	%WINDIR%\System32\%1.dll
+::copy	%WINDIR%\System32\%1.dll
 echo	%1
 ..\..\Tool\dll2lib	%1.dll > NUL
-del	%1.dll
+::del	%1.dll
 del	%1.exp
 goto	eof
 :eof
