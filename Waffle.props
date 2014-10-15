@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
+  <PropertyGroup Label="UserMacros">
+    <PEMachine Condition="'$(Platform)'=='Win32'">I386</PEMachine>
+    <PEMachine Condition="'$(Platform)'=='ARM'">ARMNT</PEMachine>
+    <PEMachine Condition="'$(Platform)'=='x64'">AMD64</PEMachine>
+    <PEMachine Condition="'$(Platform)'=='Itanium'">IA64</PEMachine>
+    <WaffleLibrary Condition="'$(TargetName)'=='Waffle.common.1.0'"></WaffleLibrary>
+    <WaffleLibrary Condition="'$(TargetName)'!='Waffle.common.1.0'">Waffle.common.1.0.lib</WaffleLibrary>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Configuration">
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
+    <UseDebugLibraries Condition="'$(Configuration)'=='Release'">false</UseDebugLibraries>
+    <WholeProgramOptimization Condition="'$(Configuration)'=='Release'">true</WholeProgramOptimization>
+    <WindowsSDKDesktopARMSupport Condition="'$(Platform)'=='ARM'">true</WindowsSDKDesktopARMSupport>
+
+    <PlatformToolset Condition="'$(Platform)'=='Win32'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(Platform)'=='ARM'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(Platform)'=='x64'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(Platform)'=='Itanium'">v100</PlatformToolset>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <CompileAs Condition="'$(Platform)'=='Itanium'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Platform)'!='Itanium'">CompileAsC</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>4055;4068;4100;4127;4201</DisableSpecificWarnings>
+      <BufferSecurityCheck Condition="'$(Configuration)'=='Release'">false</BufferSecurityCheck>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>$(WaffleLibrary);Kernel32.lib;User32.lib;Comdlg32.lib;Comctl32.lib;Shlwapi.lib;Shell32.lib;Advapi32.lib;Ole32.lib;Version.lib;Gdi32.lib</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4197 %(AdditionalOptions)</AdditionalOptions>
+      <GenerateDebugInformation Condition="'$(Configuration)'=='Debug'">true</GenerateDebugInformation>
+    </Link>
+    <Link Condition="'$(ConfigurationType)'=='Application'">
+      <EntryPointSymbol>Main</EntryPointSymbol>
+    </Link>
+    <Link Condition="'$(ConfigurationType)'=='DynamicLibrary'">
+      <EntryPointSymbol>DllMain</EntryPointSymbol>
+      <ImportLibrary>$(SolutionDir)SDK\Lib\$(PEMachine)\$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>export.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <PropertyGroup Condition="'$(ConfigurationType)'=='Application'">
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)WaffleNightly\Component\$(ComponentNamespace)\$(PEMachine)\</OutDir>
+    <IncludePath>$(SolutionDir)SDK\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDK\Lib\$(PEMachine);$(LibraryPath)</LibraryPath>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <ExecutablePath Condition="'$(Platform)'=='Itanium'">C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE;$(ExecutablePath)</ExecutablePath>
+    <RunCodeAnalysis Condition="'$(Configuration)'=='Debug'And'$(Platform)'!= 'Itanium'">true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)'=='Debug'And'$(Platform)'!= 'Itanium'">AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
