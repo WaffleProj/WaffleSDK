@@ -100,6 +100,7 @@ LIBRARY_IMPORT VOID WINAPI RtlZeroMemory(
 #include "shell32.h"
 #include "psapi.h"
 #include "comctl32.h"
+#include "ole32.h"
 
 #ifdef WAFFLE_DISABLE_CODE_ANALYSIS
 #ifdef _When_
