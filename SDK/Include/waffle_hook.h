@@ -112,4 +112,12 @@ WAFFLE_HOOK_DLL_FUNCTION SIZE_T WINAPI WaffleHookDBLookup(
     _In_    SIZE_T CallerAddress
     );
 
+WAFFLE_HOOK_DLL_FUNCTION LPWAFFLE_MODULE_NODE WINAPI WaffleHookDBAddSkipModule(
+    _In_    HMODULE hModule
+    );
+
+WAFFLE_HOOK_DLL_FUNCTION LPWAFFLE_MODULE_NODE WINAPI WaffleHookDBAddModule(
+    _In_    HMODULE hModule
+    );
+
 #endif /* __SDK_WAFFLE_HOOK_H_ */
